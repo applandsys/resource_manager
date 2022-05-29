@@ -4,6 +4,7 @@ Uses Tech:
 Laravel 8
 Vue 3
 Vue Router 4
+Axios
 Mysql Database.
 ==========================
 
