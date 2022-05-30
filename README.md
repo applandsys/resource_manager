@@ -15,7 +15,7 @@ Step 2: composer install
 
 Step 3: npm install
 
-Step 4: create a Mysql Database with DB User. Change the .env file as per Database information
+Step 4: create a Mysql Database with DB User. Change the .env file as per Database information. May need to rename the .env.example file to .env 
 
 Step 5: Run Command 'php artisan migrate' or 'php artisan migrate:fresh'
 
