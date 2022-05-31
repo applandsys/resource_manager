@@ -7,7 +7,7 @@
                 </tr>
                 </thead>
             <tbody>
-                <tr v-for="(list,index) in html_list.data" :key="index">
+                <tr v-for="(list,index) in html_list" :key="index">
                     <td>{{list.title}}</td><td>{{list.description}}</td><td>{{list.create_at}}</td><td>Action</td>
                 </tr>
             </tbody>
@@ -19,13 +19,6 @@
 import { ref } from 'vue'
 
 export default {
-    setup(props,ctx) {
-       const html_list = ref({});
-        html_list.value= props.html_list;
-        return {
-            html_list
-        }
-    },
     name:'Html List',
       props: {
         html_list: {

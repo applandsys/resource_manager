@@ -184,6 +184,10 @@ input[type=submit]:hover {
   margin: 8px;
 }
 
+button{
+  margin: 3px;
+}
+
         </style>
     </head>
     <body class="antialiased">

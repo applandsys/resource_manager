@@ -92,7 +92,7 @@ export default {
             axios.post(vue_config.BASE_URL+'/api/html_resource',fd)
             .then(response=>{
                // console.log(response);
-                 this.html_list.push = response.data;
+                this.html_list.push(response.data);
                  this.error = null;
                 this.inserted = true;
             })
@@ -107,8 +107,12 @@ export default {
     mounted(){
         axios.get(vue_config.BASE_URL+'/api/html_resource')
             .then(response=>{
-               // console.log(response);
-                this.html_list = response.data;
+                   const myresponse = response.data;
+                   const new_response = [];
+                    myresponse.data.forEach(element => {
+                        new_response.push(element);
+                   });
+                   this.html_list = new_response;
             })
             .catch(err => {
                // console.log(err);

@@ -6,6 +6,7 @@ import AdminComponent from '../components/AdminComponent';
 import UploadfileComponent from '../components/UploadfileComponent';
 import HtmlComponent from '../components/HtmlComponent';
 import LinkComponent from '../components/LinkComponent';
+import FileeditCompoent from '../components/FileeditCompoent';
 
 
   const  routes = [
@@ -42,6 +43,11 @@ import LinkComponent from '../components/LinkComponent';
             {
                 path: "links",
                 component: LinkComponent,
+                props: true
+            },
+            {
+                path: "file/:id",
+                component: FileeditCompoent,
                 props: true
             }
         ]

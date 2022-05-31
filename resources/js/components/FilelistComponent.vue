@@ -1,6 +1,5 @@
 <template>
     <div>
-        {{file_list}}
         <table class="table">
                 <thead>
                 <tr>
@@ -8,8 +7,8 @@
                 </tr>
                 </thead>
             <tbody>
-                <tr v-for="(list,index) in filelist.data" :key="index">
-                    <td>{{list.title}}</td><td>{{list.title}}</td><td>{{list.created_at}}</td><td>Action</td>
+                <tr v-for="(list,index) in file_list" :key="index">
+                    <td>{{list.title}}</td><td>{{list.title}}</td><td>{{list.created_at}}</td><td><button><router-link :to="'/admin/file/'+list.id" >Edit</router-link></button><button>Delete</button></td>
                 </tr>
             </tbody>
         </table>
@@ -20,13 +19,6 @@
 import { ref } from 'vue'
 
 export default {
-    setup(props,ctx) {
-       const filelist = ref({});
-        filelist.value= props.file_list;
-        return {
-            filelist
-        }
-    },
     name:'File List',
       props: {
         file_list: {

@@ -16,6 +16,7 @@ class FileResourceResource extends JsonResource
     {
         //return parent::toArray($request);
         return [
+            'id'=> $this->id,
             'title'=> $this->title,
             'file_name'=> $this->file_name,
             'file_size'=> $this->file_size,

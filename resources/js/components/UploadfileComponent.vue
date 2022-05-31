@@ -88,12 +88,10 @@ export default {
             fd.append('description',this.description);
             axios.post(vue_config.BASE_URL+'/api/file_resource',fd)
             .then(response=>{
-               // console.log(response);
-                 this.file_list.push = response.data;
-                 this.file_error = null;
+                    this.file_list.push(response.data);
+                    this.file_error = null;
             })
             .catch(err => {
-               // console.log(err);
                   if(err.response.status == 422) {
                       this.file_error = 'Only PDF format is Accepted';
                   }    
@@ -103,11 +101,15 @@ export default {
     mounted(){
         axios.get(vue_config.BASE_URL+'/api/file_resource')
             .then(response=>{
-               // console.log(response);
-                this.file_list = response.data;
+                   const myresponse = response.data;
+                   const new_response = [];
+                    myresponse.data.forEach(element => {
+                        new_response.push(element);
+                   });
+
+                   this.file_list = new_response;
             })
             .catch(err => {
-               // console.log(err);
                   if(err.response.status == 422) {
                       console.log("some thin erro");
                   }    

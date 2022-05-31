@@ -62,35 +62,8 @@ class FileResourceController extends Controller
              return response()->json(['message'=>$e->getMessage()]);
         }
 
-     
     }
 
-
-    public function uploadFile(Request $request){
-        $post_data = $request->all();
-        $file_title = $post_data['title'];
-        $file_description = $post_data['description'];
-
-        $File_resource = new FileResource;
-
-        $File_resource->title =  $file_title;
-        $File_resource->description =  $file_description;
-
-        $File_resource->save();
-
-       // ['title','description','file_name','file_ext','file_size','file_path'];
-
-        try{
-            if($request->hash_file('pdf')){
-
-
-            }
-        }catch(Throwable $e){
-            report($e);
-            return false;
-        }
-       // return response()->json(['fuck'=> $post_data ]);
-    }
 
     /**
      * Display the specified resource.
@@ -100,7 +73,7 @@ class FileResourceController extends Controller
      */
     public function show(FileResource $fileResource)
     {
-        //
+        return response()->json($fileResource);
     }
 
     /**
@@ -112,7 +85,79 @@ class FileResourceController extends Controller
      */
     public function update(UpdateFileResourceRequest $request, FileResource $fileResource)
     {
-        //
+  
+        $post_data = $request->all();
+      //  dd( $post_data );
+
+        $file_title = $post_data['title'];
+        $file_description = $post_data['description'];
+
+        $File_resource = $fileResource;
+
+        try{
+            if($request->hasFile('pdf')){
+                $file = $request->file('pdf');
+                $file_name = time().'-'.$file->getClientOriginalName();
+                $file_ext = $file->getClientOriginalExtension();
+                $file_path = $file->getRealPath();
+                $file_size = $file->getSize();
+
+                $file->move(public_path('pdf_resources'), $file_name);
+
+                $File_resource->title =  $file_title;
+                $File_resource->file_name =  $file_name ;
+                $File_resource->file_ext =   $file_ext;
+                $File_resource->file_size =   $file_size ;
+                $File_resource->file_path =   $file_path ;
+                $File_resource->description =  $file_description;
+        
+                $File_resource->save();
+                
+                return  $File_resource;
+
+            }
+        }catch(Throwable $e){
+             return response()->json(['message'=>$e->getMessage()]);
+        }
+
+    }
+
+    public function fileUpdate(StoreFileResourceRequest $request){
+        $post_data = $request->all();
+        //  dd( $post_data );
+  
+          $file_id = $post_data['id'];
+          $file_title = $post_data['title'];
+          $file_description = $post_data['description'];
+  
+          $File_resource = FileResource::find($file_id);
+  
+          try{
+              if($request->hasFile('pdf')){
+                  $file = $request->file('pdf');
+                  $file_name = time().'-'.$file->getClientOriginalName();
+                  $file_ext = $file->getClientOriginalExtension();
+                  $file_path = $file->getRealPath();
+                  $file_size = $file->getSize();
+  
+                  $file->move(public_path('pdf_resources'), $file_name);
+  
+                  $File_resource->title =  $file_title;
+                  $File_resource->file_name =  $file_name ;
+                  $File_resource->file_ext =   $file_ext;
+                  $File_resource->file_size =   $file_size ;
+                  $File_resource->file_path =   $file_path ;
+                  $File_resource->description =  $file_description;
+          
+                  $File_resource->save();
+                  
+                  return  $File_resource;
+  
+              }
+          }catch(Throwable $e){
+               return response()->json(['message'=>$e->getMessage()]);
+          }
+     
     }
 
     /**

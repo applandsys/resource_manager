@@ -29,6 +29,14 @@ class LinkResourceController extends Controller
     {
         $link = LinkResource::create($request->all());
 
+        return [
+            'title'=>$link->title,
+            'description'=>$link->description,
+            'link_url'=>$link->link_url,
+            'new_tab'=>$link->new_tab,
+            'created_at'=>  date('Y-m-d H:i A', strtotime($link->created_at))
+        ];
+
         return response()->json($link, 201);
     }
 

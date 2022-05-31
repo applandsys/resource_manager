@@ -7,7 +7,7 @@
                 </tr>
                 </thead>
             <tbody>
-                <tr v-for="(list,index) in link_list.data" :key="index">
+                <tr v-for="(list,index) in link_list" :key="index">
                     <td>{{list.title}}</td><td>{{list.title}}</td><td>{{list.created_at}}</td><td>Action</td>
                 </tr>
             </tbody>
@@ -16,16 +16,8 @@
 </template>
 
 <script>
-import { ref,reactive } from 'vue'
 
 export default {
-    setup(props,ctx) {
-       const link_list = reactive({});
-        link_list.value= props.link_list;
-        return {
-            link_list
-        }
-    },
     name:'Html List',
       props: {
         link_list: {

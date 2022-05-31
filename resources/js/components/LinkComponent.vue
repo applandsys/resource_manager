@@ -66,7 +66,7 @@
 
                     <div v-if="link_list.length==0"><h3>No Link Inserted yet </h3></div>
                     <div v-else>
-                       <linklist-component v-bind:link_list="link_list"/>
+                       <linklist-component v-bind:link_list="linkList"/>
                     </div>    
                     
             </div>
@@ -94,13 +94,13 @@ export default {
             inserted: false,
         }
     },
-    computed(){
-       
+    computed:{
+       linkList(){
+           return this.link_list;
+       }
     },
     methods:{
-  
         insertData(){
-
             const fd = {
                         title: this.title,
                         description: this.description,
@@ -110,31 +110,43 @@ export default {
 
             axios.post(vue_config.BASE_URL+'/api/link_resource',fd)
             .then(response=>{
-               // console.log(response);
-                 this.link_list.push = response.data;
+                 this.link_list.push(response.data);
                  this.error = null;
                  this.inserted = true;
             })
             .catch(err => {
                // console.log(err);
+               /*
                   if(err.response.status == 422) {
                       this.file_error = 'Insert Error from Server';
-                  }    
+                  }
+                 */     
             })
         }
     },
     mounted(){
         axios.get(vue_config.BASE_URL+'/api/link_resource')
             .then(response=>{
-               // console.log(response);
-                this.link_list = response.data;
+                   const myresponse = response.data;
+               
+                   const new_response = [];
+                    myresponse.data.forEach(element => {
+                        new_response.push(element);
+                   });
+
+                    this.link_list = new_response;
+                
             })
             .catch(err => {
                // console.log(err);
+               /*
                   if(err.response.status == 422) {
                       console.log("some thin erro");
-                  }    
+                  }
+                  */    
             })
+
+              
     }
 }
 </script>
