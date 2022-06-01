@@ -39,7 +39,7 @@ export default {
 
            axios.delete(vue_config.BASE_URL+'/api/file_resource/'+file_id)
             .then(response=>{
-                    this.file_list.push(response.data);
+                    this.file_list.pop(response.data);
                     this.file_error = null;
                     this.inserted = true;
             })

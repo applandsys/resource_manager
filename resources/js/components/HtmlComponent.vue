@@ -4,10 +4,10 @@
             <div class="col-2">
                     <h2>{{ title_page }}</h2>
                     <p>HTML Content can Insert and manage here </p>
-                        <div v-if="inserted" class="success_alert">Data Inserted Sucessfully for link {{link_url}}</div>
+                        <div v-if="inserted" class="success_alert">HTML Snipped Inserted</div>
 
                     <div class="container">
-                        <form>
+                        <form @submit.prevent="insertData">
                             <div class="row">
                                 <div class="col-25">
                                 <label for="title">HTML title</label>
@@ -25,7 +25,7 @@
                                 <textarea id="content" v-model="description" name="content" placeholder="Write something.." ></textarea>
                                 </div>
                             </div>
-                            
+
                             <div class="row">
                                 <div class="col-25">
                                 <label for="content">HTML Snipped </label>
@@ -37,7 +37,7 @@
                         <br>
                             <div class="row">
                                 <div class="right">
-                                    <input type="submit" value="Submit" @click.prevent="insertData">
+                                    <input type="submit" value="Submit" >
                                 </div>
                             </div>
                         </form>
@@ -45,13 +45,13 @@
 
             </div>
             <div class="col-2">
-         
+
 
                     <div v-if="html_list.length==0"><h3>No HTML Inserted yet </h3></div>
                     <div v-else>
                        <htmllist-component v-bind:html_list="html_list"/>
-                    </div>    
-                    
+                    </div>
+
             </div>
         </div>
     </div>
@@ -77,10 +77,10 @@ export default {
         }
     },
     computed(){
-       
+
     },
     methods:{
-  
+
         insertData(){
 
             const fd = {
@@ -93,14 +93,18 @@ export default {
             .then(response=>{
                // console.log(response);
                 this.html_list.push(response.data);
-                 this.error = null;
+                this.error = null;
                 this.inserted = true;
+
+                 this.title=null,
+                 this.description=null,
+                 this.html_snipped=null
             })
             .catch(err => {
                // console.log(err);
                   if(err.response.status == 422) {
                       this.file_error = 'Insert Error from Server';
-                  }    
+                  }
             })
         }
     },
@@ -118,7 +122,7 @@ export default {
                // console.log(err);
                   if(err.response.status == 422) {
                       console.log("some thin erro");
-                  }    
+                  }
             })
     }
 }

@@ -16,7 +16,9 @@
 </template>
 
 <script>
-import { ref } from 'vue'
+import { ref } from 'vue';
+import axios from 'axios';
+import vue_config from '../vue_config';
 
 export default {
     name:'Html List',
@@ -27,7 +29,22 @@ export default {
       },
     data(){
         return{
-            title: 'Html List Component'
+            title: 'Html List Component',
+            error:null,
+            inserted:true,
+        }
+    },
+    methods:{
+        handleDelete(id){
+             axios.delete(vue_config.BASE_URL+'/api/html_resource/'+id)
+            .then(response=>{
+                    this.html_list.pop(response.data);
+                    this.error = null;
+                    this.inserted = true;
+            })
+            .catch(err => {
+
+            })
         }
     }
 }
