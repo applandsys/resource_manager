@@ -8,6 +8,7 @@ import HtmlComponent from '../components/HtmlComponent';
 import LinkComponent from '../components/LinkComponent';
 import FileeditCompoent from '../components/FileeditCompoent';
 import HtmleditComponent from "../components/HtmleditComponent.vue";
+import LinkeditComponent from "../components/LinkeditComponent";
 
 
   const  routes = [
@@ -56,6 +57,13 @@ import HtmleditComponent from "../components/HtmleditComponent.vue";
                 component: HtmleditComponent,
                 props: true
             },
+            {
+                path: "link_edit/:id",
+                component: LinkeditComponent,
+                props: true
+            }
+
+   
 
         ]
     }

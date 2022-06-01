@@ -16,6 +16,7 @@ class LinkResourceResource extends JsonResource
     {
         //return parent::toArray($request);
         return [
+            'id'=>$this->id,
             'title'=>$this->title,
             'description'=>$this->description,
             'link_url'=>$this->link_url,
