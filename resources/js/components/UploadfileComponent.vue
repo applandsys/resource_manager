@@ -5,6 +5,10 @@
                     <h2>{{ title }}</h2>
                     <p>Upload File that can accessible by Visitors. </p>
 
+                    <div class="red">{{file_error}}</div>
+                    <div v-if="inserted" class="success_alert">File Uploaded Successfully</div>
+
+
                     <div class="container">
                         <form>
                             <div class="row">
@@ -16,7 +20,7 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="red">{{file_error}}</div>  
+                                <div class="red">{{file_error}}</div>
                                 <div class="col-25">
                                 <label for="file">Upload File (PDF Only)</label>
                                 </div>
@@ -45,12 +49,12 @@
 
             </div>
             <div class="col-2">
-         
+
                     <div v-if="file_list.length==0"><h3>No file uploaded yet </h3></div>
                     <div v-else>
                        <filelist-component v-bind:file_list="file_list"/>
-                    </div>    
-                    
+                    </div>
+
             </div>
         </div>
     </div>
@@ -72,10 +76,12 @@ export default {
             file_title: null,
             description: null,
             file_error: null,
+            inserted: false,
+
         }
     },
     computed(){
-       
+
     },
     methods:{
         onFileSelected(event){
@@ -90,11 +96,12 @@ export default {
             .then(response=>{
                     this.file_list.push(response.data);
                     this.file_error = null;
+                    this.inserted = true;
             })
             .catch(err => {
                   if(err.response.status == 422) {
                       this.file_error = 'Only PDF format is Accepted';
-                  }    
+                  }
             })
         }
     },
@@ -112,7 +119,7 @@ export default {
             .catch(err => {
                   if(err.response.status == 422) {
                       console.log("some thin erro");
-                  }    
+                  }
             })
     }
 }

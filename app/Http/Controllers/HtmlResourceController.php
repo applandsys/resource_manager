@@ -40,7 +40,7 @@ class HtmlResourceController extends Controller
      */
     public function show(HtmlResource $htmlResource)
     {
-        //
+        return response()->json($htmlResource);
     }
 
     /**
@@ -52,7 +52,8 @@ class HtmlResourceController extends Controller
      */
     public function update(UpdateHtmlResourceRequest $request, HtmlResource $htmlResource)
     {
-        //
+        $htmlResource = $htmlResource->update($request->all());
+        return  $htmlResource;
     }
 
     /**
@@ -63,6 +64,7 @@ class HtmlResourceController extends Controller
      */
     public function destroy(HtmlResource $htmlResource)
     {
-        //
+        $htmlResource->delete();
+        return response()->json(['message'=>"Deleted HTML Resoruce Successfully"]);
     }
 }

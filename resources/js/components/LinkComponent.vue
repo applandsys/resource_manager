@@ -4,7 +4,7 @@
             <div class="col-2">
                     <h2>{{ title_page }}</h2>
                     <p>Link Content can Insert and manage here </p>
-                   <div class="red">{{error}}</div>  
+                    <div class="red">{{error}}</div>
                     <div v-if="inserted" class="success_alert">Data Inserted Sucessfully for link {{link_url}}</div>
 
                     <div class="container">
@@ -26,7 +26,7 @@
                                 <textarea id="content" v-model="description" name="content" placeholder="Write something.." ></textarea>
                                 </div>
                             </div>
-                            
+
                             <div class="row">
                                 <div class="col-25">
                                 <label for="url">Link Url </label>
@@ -62,13 +62,13 @@
 
             </div>
             <div class="col-2">
-         
+
 
                     <div v-if="link_list.length==0"><h3>No Link Inserted yet </h3></div>
                     <div v-else>
                        <linklist-component v-bind:link_list="linkList"/>
-                    </div>    
-                    
+                    </div>
+
             </div>
         </div>
     </div>
@@ -120,7 +120,7 @@ export default {
                   if(err.response.status == 422) {
                       this.file_error = 'Insert Error from Server';
                   }
-                 */     
+                 */
             })
         }
     },
@@ -128,14 +128,14 @@ export default {
         axios.get(vue_config.BASE_URL+'/api/link_resource')
             .then(response=>{
                    const myresponse = response.data;
-               
+
                    const new_response = [];
                     myresponse.data.forEach(element => {
                         new_response.push(element);
                    });
 
                     this.link_list = new_response;
-                
+
             })
             .catch(err => {
                // console.log(err);
@@ -143,10 +143,10 @@ export default {
                   if(err.response.status == 422) {
                       console.log("some thin erro");
                   }
-                  */    
+                  */
             })
 
-              
+
     }
 }
 </script>

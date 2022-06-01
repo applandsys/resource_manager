@@ -8,7 +8,7 @@
                 </thead>
             <tbody>
                 <tr v-for="(list,index) in html_list" :key="index">
-                    <td>{{list.title}}</td><td>{{list.description}}</td><td>{{list.create_at}}</td><td>Action</td>
+                    <td>{{list.title}}</td><td>{{list.description}}</td><td>{{list.created_at}}</td><td><button><router-link :to="'/admin/html_edit/'+list.id" >Edit</router-link></button><button @click.prevent="handleDelete(list.id)">Delete</button></td>
                 </tr>
             </tbody>
         </table>

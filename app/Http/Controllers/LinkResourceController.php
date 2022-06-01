@@ -48,7 +48,7 @@ class LinkResourceController extends Controller
      */
     public function show(LinkResource $linkResource)
     {
-        //
+        return response()->json($linkResource);
     }
 
     /**
@@ -60,7 +60,8 @@ class LinkResourceController extends Controller
      */
     public function update(UpdateLinkResourceRequest $request, LinkResource $linkResource)
     {
-        //
+        $linkResource = $linkResource->update($request->all());
+        return  $linkResource;
     }
 
     /**
@@ -71,6 +72,7 @@ class LinkResourceController extends Controller
      */
     public function destroy(LinkResource $linkResource)
     {
-        //
+        $linkResource->delete();
+        return response()->json(['message'=>"Deleted Link Resoruce Successfully"]);
     }
 }

@@ -7,6 +7,7 @@ import UploadfileComponent from '../components/UploadfileComponent';
 import HtmlComponent from '../components/HtmlComponent';
 import LinkComponent from '../components/LinkComponent';
 import FileeditCompoent from '../components/FileeditCompoent';
+import HtmleditComponent from "../components/HtmleditComponent.vue";
 
 
   const  routes = [
@@ -49,7 +50,13 @@ import FileeditCompoent from '../components/FileeditCompoent';
                 path: "file/:id",
                 component: FileeditCompoent,
                 props: true
-            }
+            },
+            {
+                path: "html_edit/:id",
+                component: HtmleditComponent,
+                props: true
+            },
+
         ]
     }
 ]

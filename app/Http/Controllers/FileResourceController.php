@@ -7,6 +7,7 @@ use App\Http\Requests\StoreFileResourceRequest;
 use App\Http\Requests\UpdateFileResourceRequest;
 use Illuminate\Http\Request ;
 use App\Http\Resources\FileResourceResource;
+use Throwable;
 
 
 class FileResourceController extends Controller
@@ -52,9 +53,9 @@ class FileResourceController extends Controller
                 $File_resource->file_size =   $file_size ;
                 $File_resource->file_path =   $file_path ;
                 $File_resource->description =  $file_description;
-        
+
                 $File_resource->save();
-                
+
                 return  $File_resource;
 
             }
@@ -85,9 +86,9 @@ class FileResourceController extends Controller
      */
     public function update(UpdateFileResourceRequest $request, FileResource $fileResource)
     {
-  
+
         $post_data = $request->all();
-      //  dd( $post_data );
+        dd( $post_data );
 
         $file_title = $post_data['title'];
         $file_description = $post_data['description'];
@@ -110,9 +111,9 @@ class FileResourceController extends Controller
                 $File_resource->file_size =   $file_size ;
                 $File_resource->file_path =   $file_path ;
                 $File_resource->description =  $file_description;
-        
+
                 $File_resource->save();
-                
+
                 return  $File_resource;
 
             }
@@ -125,13 +126,13 @@ class FileResourceController extends Controller
     public function fileUpdate(StoreFileResourceRequest $request){
         $post_data = $request->all();
         //  dd( $post_data );
-  
+
           $file_id = $post_data['id'];
           $file_title = $post_data['title'];
           $file_description = $post_data['description'];
-  
+
           $File_resource = FileResource::find($file_id);
-  
+
           try{
               if($request->hasFile('pdf')){
                   $file = $request->file('pdf');
@@ -139,25 +140,33 @@ class FileResourceController extends Controller
                   $file_ext = $file->getClientOriginalExtension();
                   $file_path = $file->getRealPath();
                   $file_size = $file->getSize();
-  
+
                   $file->move(public_path('pdf_resources'), $file_name);
-  
+
                   $File_resource->title =  $file_title;
                   $File_resource->file_name =  $file_name ;
                   $File_resource->file_ext =   $file_ext;
                   $File_resource->file_size =   $file_size ;
                   $File_resource->file_path =   $file_path ;
                   $File_resource->description =  $file_description;
-          
+
                   $File_resource->save();
-                  
+
                   return  $File_resource;
-  
+
+              }else{
+
+                    $File_resource->title =  $file_title;
+                    $File_resource->description =  $file_description;
+                    $File_resource->save();
+
+                    return  $File_resource;
+
               }
           }catch(Throwable $e){
                return response()->json(['message'=>$e->getMessage()]);
           }
-     
+
     }
 
     /**
@@ -169,5 +178,7 @@ class FileResourceController extends Controller
     public function destroy(FileResource $fileResource)
     {
         //
+        $fileResource->delete();
+        return response()->json(['message'=>"Deleted File Successfully"]);
     }
 }

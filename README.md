@@ -19,6 +19,8 @@ Step 4: create a Mysql Database with DB User. Change the .env file as per Databa
 
 Step 5: Run Command 'php artisan migrate' or 'php artisan migrate:fresh'
 
-Step 6: Run command 'php artisan serve'  (To run the Local server)
+Step 6: Run Command 'php artisan key:generate'
+
+Step 7: Run command 'php artisan serve'  (To run the Local server)
 
 Thanks
