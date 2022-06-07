@@ -1,4 +1,4 @@
-This project is as same as vanilla Laravel Deployment. Developed with Laravel 8 Scafolding with Vue 3.
+This is a Resoruce Management Panel File, Link etc . This project is as same as vanilla Laravel Deployment. Developed with Laravel 8 Scafolding with Vue 3.
 
 Uses Tech:
 Laravel 8
