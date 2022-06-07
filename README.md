@@ -9,7 +9,7 @@ Mysql Database.
 ==========================
 
 Step 1: Clone the Project from Git
-git clone https://github.com/applandsys/resource_manager.git
+'git clone https://github.com/applandsys/resource_manager.git'
 
 Step 2: composer install
 
